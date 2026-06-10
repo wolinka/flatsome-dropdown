@@ -1,0 +1,106 @@
+/* 
+ * Flatsome Dropdown Plugin Core CSS 
+ */
+
+/* Baseline container for classic dropdown */
+.flatsome-classic-dropdown {
+    position: relative;
+}
+
+.flatsome-classic-dropdown ul.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    
+    /* Animation transitions */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+/* Deep sub-menus (Level 2+) push themselves to the right */
+.flatsome-classic-dropdown ul.sub-menu ul.sub-menu {
+    top: 0;
+    left: 100%;
+}
+
+/* Hover behaviors */
+.flatsome-classic-dropdown.has-classic-dropdown:hover > ul.sub-menu,
+.flatsome-classic-dropdown ul.sub-menu > li.has-classic-dropdown:hover > ul.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* If screen overflows to the right, flow submenus left via JS utility class */
+.flatsome-classic-dropdown ul.sub-menu.flow-left {
+    left: auto;
+    right: 100%;
+}
+
+/* List Items */
+.flatsome-classic-dropdown ul.sub-menu li {
+    display: block;
+    position: relative !important;
+    margin: 0;
+    padding: 0;
+}
+
+.flatsome-classic-dropdown ul.sub-menu li:last-child {
+    border-bottom: none !important;
+}
+
+/* Links inside the dropdown */
+.flatsome-classic-dropdown ul.sub-menu li a {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px !important;
+    text-decoration: none;
+    color: #333; /* Fallback text color */
+    line-height: 1.4;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap; /* Prevents text from breaking into multiple cramped lines */
+}
+
+.flatsome-classic-dropdown ul.sub-menu li a:hover {
+    background-color: rgba(0,0,0,0.03) !important;
+}
+
+/* Add an arrow for items with children at deeper levels */
+.flatsome-classic-dropdown ul.sub-menu i.icon-angle-right {
+    font-size: 0.9em;
+    opacity: 0.7;
+    margin-left: 10px;
+}
+
+/* Override Flatsome default container width if needed (e.g. mega menus forcing specific widths) */
+li.flatsome-classic-dropdown.menu-item-design-container-width > ul.sub-menu,
+li.flatsome-classic-dropdown.menu-item-design-full-width > ul.sub-menu {
+    width: auto !important;
+    left: 0 !important;
+    right: auto !important;
+    inset: auto !important;
+}
+
+/* Optional mobile adjustments in case flatsome triggers mobile menu logic incorrectly */
+@media screen and (max-width: 849px) {
+    /* Depending on how Flatsome handles mobile off-canvas, we usually want these to fall back to natural accordion if inside off-canvas */
+    .off-canvas .flatsome-classic-dropdown ul.sub-menu {
+        position: relative;
+        left: auto;
+        top: auto;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        min-width: unset;
+        width: 100%;
+        display: none; /* Let js/CSS handle accordion styling if Flatsome applies it */
+    }
+}
